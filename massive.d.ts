@@ -69,6 +69,6 @@ declare module massive {
 
     export function saveDoc(name: string, data: any, callback: (err, res) => {}): void;
   }
-
-	export = massive;
 }
+
+export = massive;
