@@ -1,0 +1,31 @@
+{
+  "name": "typed-massive-js",
+  "version": "1.0.0",
+  "description": "Type definition for [massive-js](https://github.com/robconery/massive-js)",
+  "main": "test/test.js",
+  "scripts": {
+    "clean": "rm -rfv typings",
+    "build": "npm run clean && typings install && tsc",
+    "start": "npm run build",
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swissspidy/typed-massive-js"
+  },
+  "keywords": [
+    "TypeScript",
+    "postgresql",
+    "pg",
+    "postgres",
+    "massive-js",
+  ],
+  "author": "swissspidy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/swissspidy/typed-massive-js/issues"
+  },
+  "homepage": "https://github.com/swissspidy/typed-massive-js",
+  "dependencies": {
+    "massive-js": "^2.2.0"
+  }
+}

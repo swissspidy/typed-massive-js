@@ -1,0 +1,10 @@
+{
+  "name": "massive",
+  "author": "swissspidy",
+  "main": "massive.d.ts",
+  "browser": "massive.d.ts",
+  "dependencies": {},
+  "devDependencies": {
+    "massive-js": "file:massive.d.ts"
+  }
+}
