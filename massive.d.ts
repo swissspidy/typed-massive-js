@@ -10,7 +10,7 @@ declare module massive {
     }
 
     export interface ITable {
-        find(context: any, callback: (err, res) => {}): void;
+        find(context: any, callback: (err, res) => void): void;
         find(context: any,
              options: {
                  limit?: number;
@@ -18,8 +18,8 @@ declare module massive {
                  offset?: number;
                  columns?: string[];
              },
-             callback: (err, res) => {}): void;
-        findOne(context: any, callback: (err, res) => {}): void;
+             callback: (err, res) => void): void;
+        findOne(context: any, callback: (err, res) => void): void;
         findOne(context: any,
                 options: {
                     limit?: number;
@@ -27,24 +27,24 @@ declare module massive {
                     offset?: number;
                     columns?: string[];
                 },
-                callback: (err, res) => {}): void;
+                callback: (err, res) => void): void;
 
-        insert(context: any, callback: (err, res) => {}): void;
-        save(context: any, callback: (err, res) => {}): void;
-        update(context: any, callback: (err, res) => {}): void;
-        update(context: any, data: any, callback: (err, res) => {}): void;
-        destroy(context: any, callback: (err, res) => {}): void;
+        insert(context: any, callback: (err, res) => void): void;
+        save(context: any, callback: (err, res) => void): void;
+        update(context: any, callback: (err, res) => void): void;
+        update(context: any, data: any, callback: (err, res) => void): void;
+        destroy(context: any, callback: (err, res) => void): void;
 
     }
 
     interface IDoc {
-        findDoc(context: any, callback: (err, res) => {}): void;
+        findDoc(context: any, callback: (err, res) => void): void;
         searchDoc(options: {
             keys: string[];
             term: string;
-        }, callback: (err, res) => {})
-        saveDoc(context: string, callback: (err, res) => {}): void;
-        destroy(context: any, callback: (err, res) => {}): void;
+        }, callback: (err, res) => void)
+        saveDoc(context: string, callback: (err, res) => void): void;
+        destroy(context: any, callback: (err, res) => void): void;
     }
 
     export interface ITables {
@@ -62,11 +62,11 @@ declare module massive {
 
     export function connectSync(options: IConnectionOptions): ITables
 
-    export function connect(options: IConnectionOptions, callback: (err, db) => {});
+    export function connect(options: IConnectionOptions, callback: (err, db) => void);
 
-    export function run(context: string, filter: number|number[], callback: (err, res) => {})
+    export function run(context: string, filter: number|number[], callback: (err, res) => void)
 
-    export function saveDoc(name: string, data: any, callback: (err, res) => {}): void;
+    export function saveDoc(name: string, data: any, callback: (err, res) => void): void;
 }
 
 export = massive;
