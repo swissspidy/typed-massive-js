@@ -10,6 +10,7 @@ declare module massive {
     }
 
     export interface ITable {
+        count(context: any, callback: (err, res) => void): void;
         find(context: any, callback: (err, res) => void): void;
         find(context: any,
              options: {
