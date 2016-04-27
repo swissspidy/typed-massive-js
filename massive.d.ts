@@ -1,6 +1,6 @@
 // Type definitions for massive-js 2.2
 // Project: https://github.com/robconery/massive-js
-// Definitions by: Amenaeble <https://github.com/amenaeble/>
+// Definitions by: Pascal Birchler <https://github.com/swissspidy>
 // Definitions: https://github.com/swissspidy/typed-massive-js
 
 declare module massive {
@@ -9,61 +9,88 @@ declare module massive {
         db?: string;
     }
 
-    export interface ITable {
-        count(context: any, callback: (err, res) => void): void;
-        find(context: any, callback: (err, res) => void): void;
-        find(context: any,
-             options: {
-                 limit?: number;
-                 order?: string;
-                 offset?: number;
-                 columns?: string[];
-             },
-             callback: (err, res) => void): void;
-        findOne(context: any, callback: (err, res) => void): void;
-        findOne(context: any,
-                options: {
-                    limit?: number;
-                    order?: string;
-                    offset?: number;
-                    columns?: string[];
-                },
-                callback: (err, res) => void): void;
+    export type ResultCallback = (err: Error, res: any) => void;
+    export type ConnectCallback = (err: Error, db: Massive) => void;
 
-        insert(context: any, callback: (err, res) => void): void;
-        save(context: any, callback: (err, res) => void): void;
-        update(context: any, callback: (err, res) => void): void;
-        update(context: any, data: any, callback: (err, res) => void): void;
-        destroy(context: any, callback: (err, res) => void): void;
-
+    export interface QueryOptions {
+        limit?: number;
+        order?: string;
+        offset?: number;
+        columns?: string[];
     }
 
-    interface IDoc {
+    export interface Table {
+        count(context: any, callback: ResultCallback): void;
+        find(context: any, callback: ResultCallback): void;
+        find(context: any, options: QueryOptions, callback: ResultCallback): void;
+        findOne(context: any, callback: ResultCallback): void;
+        findOne(context: any, options: QueryOptions, callback: ResultCallback): void;
+        insert(context: any, callback: ResultCallback): void;
+        save(context: any, callback: ResultCallback): void;
+        update(context: any, callback: ResultCallback): void;
+        update(context: any, data: any, callback: ResultCallback): void;
+        destroy(context: any, callback: ResultCallback): void;
+    }
+
+    interface Doc {
         findDoc(context: any, callback: (err, res) => void): void;
         searchDoc(options: {
             keys: string[];
             term: string;
         }, callback: (err, res) => void)
-        saveDoc(context: string, callback: (err, res) => void): void;
-        destroy(context: any, callback: (err, res) => void): void;
+        saveDoc(context: string, callback: ResultCallback): void;
+        destroy(context: any, callback: ResultCallback): void;
     }
 
-    export interface ITables {
-        comment: ITable;
-        friendship: ITable;
-        participation: ITable;
-        person: ITable;
-        practice: ITable;
-        practicesession: ITable;
-        sport: ITable;
-        team: ITable;
-        teammember: ITable;
-        teamsport: ITable;
+    interface QueryFile {
+        schema: string;
+        name: string;
+        db: Massive;
+        delimitedName: string;
+        delimitedSchema: string;
+        fullname: string;
+        delimitedFullName: string;
+        sql: string;
+        filePath: string;
     }
 
-    export function connectSync(options: IConnectionOptions): ITables
+    interface QueryFunction {
+        find: (params: any|any[], callback: ResultCallback) => void;
+    }
 
-    export function connect(options: IConnectionOptions, callback: (err, db) => void);
+    export interface Massive {
+        custom: any;
+        comment: Table;
+        friendship: Table;
+        participation: Table;
+        person: Table;
+        practice: Table;
+        practicesession: Table;
+        sport: Table;
+        team: Table;
+        teammember: Table;
+        teamsport: Table;
+        scriptsDir: string;
+        connectionString: string;
+        query: Function;
+        stream: Function;
+        executeSqlFile: Function;
+        end: Function;
+        tables: Array<Doc|Table>;
+        views: any[];
+        queryFiles: QueryFile[];
+        schemas: any[];
+        functions: any[];
+        allowedSchemas: string;
+        blacklist: string;
+        exceptions: string;
+        excludeFunctions: boolean;
+        functionBlacklist: string;
+    }
+
+    export function connectSync(options: IConnectionOptions): Massive
+
+    export function connect(options: IConnectionOptions, callback: ConnectCallback);
 
     export function run(context: string, filter: number|number[], callback: (err, res) => void)
 
