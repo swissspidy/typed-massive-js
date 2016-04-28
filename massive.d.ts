@@ -33,11 +33,11 @@ declare module massive {
     }
 
     interface Doc {
-        findDoc(context: any, callback: (err, res) => void): void;
+        findDoc(context: any, callback: ResultCallback): void;
         searchDoc(options: {
             keys: string[];
             term: string;
-        }, callback: (err, res) => void)
+        }, callback: ResultCallback): void;
         saveDoc(context: string, callback: ResultCallback): void;
         destroy(context: any, callback: ResultCallback): void;
     }
@@ -90,11 +90,11 @@ declare module massive {
 
     export function connectSync(options: IConnectionOptions): Massive
 
-    export function connect(options: IConnectionOptions, callback: ConnectCallback);
+    export function connect(options: IConnectionOptions, callback: ConnectCallback): void;
 
-    export function run(context: string, filter: number|number[], callback: (err, res) => void)
+    export function run(context: string, filter: number|number[], callback: ResultCallback): void;
 
-    export function saveDoc(name: string, data: any, callback: (err, res) => void): void;
+    export function saveDoc(name: string, data: any, callback: ResultCallback): void;
 }
 
 export = massive;
