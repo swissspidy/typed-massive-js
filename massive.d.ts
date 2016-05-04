@@ -67,6 +67,7 @@ declare module massive {
         practice: Table;
         practicesession: Table;
         sport: Table;
+        testdata: (callback: ResultCallback) => void;
         team: Table;
         teammember: Table;
         teamsport: Table;
